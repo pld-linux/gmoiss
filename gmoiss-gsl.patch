@@ -1,0 +1,42 @@
+diff -urN gmoiss-0.5/gmoiss-src/Makefile.in gmoiss-0.5.patch/gmoiss-src/Makefile.in
+--- gmoiss-0.5/gmoiss-src/Makefile.in	Fri Mar 19 21:20:46 1999
++++ gmoiss-0.5.patch/gmoiss-src/Makefile.in	Tue May 22 15:30:48 2001
+@@ -126,7 +126,7 @@
+ ZVT_LIBS = @ZVT_LIBS@
+ l = @l@
+ 
+-INCLUDES =  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	-I$(includedir) $(GNOME_INCLUDEDIR)
++INCLUDES =  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	-I$(includedir) $(GNOME_INCLUDEDIR) -I$(oldincludedir)/gsl
+ 
+ 
+ # change gnomestandalone to your program name
+@@ -140,7 +140,7 @@
+ 
+ # change gnomestandalone to your program's name
+ # add any libs needed
+-gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl 
++gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl -lgslblas
+ 
+ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+ CONFIG_HEADER = ../config.h
+diff -urN gmoiss-0.5/moiss-src/Makefile.in gmoiss-0.5.patch/moiss-src/Makefile.in
+--- gmoiss-0.5/moiss-src/Makefile.in	Fri Mar 19 21:20:47 1999
++++ gmoiss-0.5.patch/moiss-src/Makefile.in	Tue May 22 15:34:44 2001
+@@ -152,7 +152,7 @@
+ @PVM_TRUE@PVM_LIBS = -lpvm3
+ @PVM_FALSE@PVM_LIBS = 
+ 
+-moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS)
++moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS) -lgslblas
+ 
+ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+ CONFIG_HEADER = ../config.h
+@@ -160,7 +160,7 @@
+ PROGRAMS =  $(bin_PROGRAMS)
+ 
+ 
+-DEFS = @DEFS@ -I. -I$(srcdir) -I..
++DEFS = @DEFS@ -I. -I$(srcdir) -I.. -I $(oldincludedir)/gsl
+ LIBS = @LIBS@
+ moiss_OBJECTS =  moiss.o init.o output.o potential.o walk.o bto.o misc.o \
+ linmin.o minimize.o powell.o vmc.o path.o rand.o stats.o
