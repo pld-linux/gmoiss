@@ -2,7 +2,7 @@ Summary:	Quantum Chemistry program
 Summary(pl):	Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
-Release:	6
+Release:	7
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
@@ -55,7 +55,7 @@ install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Science/Chemistry
 
 #%find_lang %{name}
 
@@ -66,4 +66,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Scientific/Chemistry/*
+%{_applnkdir}/Science/Chemistry/*
