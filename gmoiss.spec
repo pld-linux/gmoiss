@@ -50,7 +50,7 @@ rm -f acinclude.m4 missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Science/Chemistry
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
