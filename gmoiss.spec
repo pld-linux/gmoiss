@@ -45,8 +45,12 @@ Monte Carlo.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/%{name}.desktop
+%{__install} -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%{__install} %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -54,4 +58,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Scientific/%{name}.desktop
+%{_applnkdir}/Scientific/*
