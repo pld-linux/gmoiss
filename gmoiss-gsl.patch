@@ -15,7 +15,7 @@ diff -urN gmoiss-0.5/gmoiss-src/Makefile.in gmoiss-0.5.patch/gmoiss-src/Makefile
  # change gnomestandalone to your program's name
  # add any libs needed
 -gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl 
-+gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl -lgslblas
++gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl -lgslcblas
  
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
  CONFIG_HEADER = ../config.h
@@ -27,7 +27,7 @@ diff -urN gmoiss-0.5/moiss-src/Makefile.in gmoiss-0.5.patch/moiss-src/Makefile.i
  @PVM_FALSE@PVM_LIBS = 
  
 -moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS)
-+moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS) -lgslblas
++moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS) -lgslcblas
  
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
  CONFIG_HEADER = ../config.h
