@@ -5,8 +5,6 @@ Version:	0.5
 Release:	2
 License:	GPL
 Group:		X11/Applications/Science
-Group(de):	X11/Applikationen/Wissenschaft
-Group(pl):	X11/Aplikacje/Nauka
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-gsl.patch
