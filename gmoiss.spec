@@ -45,12 +45,12 @@ Monte Carlo.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__install} -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__install} %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 
 %clean
 rm -rf $RPM_BUILD_ROOT
