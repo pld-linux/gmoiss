@@ -50,12 +50,12 @@ automake -a -c -f
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Science
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Science
 
 #%find_lang %{name}
 
@@ -66,4 +66,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Scientific/*
+%{_applnkdir}/Science/*
