@@ -11,17 +11,17 @@ Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-gsl.patch
 URL:		http://moiss.pquim.unam.mx/moiss/
-BuildRequires:	gsl-devel
-BuildRequires:	glib-devel >= 1.1.12
-BuildRequires:	pvm-devel
-BuildRequires:	XFree86-devel
-BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	gettext
-BuildRequires:	libPropList-devel
 BuildRequires:	ORBit-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	esound-devel
-Requires:	glib >= 1.1.12
-Requires:	gtk+ >= 1.2.0
+BuildRequires:	gsl-devel >= 0.9
+BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	gettext-devel
+BuildRequires:	libPropList-devel
+BuildRequires:	libtool
+BuildRequires:	pvm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -40,8 +40,15 @@ Monte Carlo.
 %patch0 -p1
 
 %build
-./configure --prefix=%{_prefix} --mandir=%{_mandir} --enable-pvm
-%{__make} CFLAGS="%{rpmcflags} -DGCC_INLINE"
+rm -f acinclude.m4 missing
+libtoolize --copy --force
+gettextize --copy --force
+aclocal -I macros
+autoconf
+automake -a -c
+%configure \
+	--enable-pvm
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -52,10 +59,13 @@ install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 
+#%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+#%files -f %{name}.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Scientific/*
