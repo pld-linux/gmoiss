@@ -8,6 +8,7 @@ Group:		X11/Applications/Science
 Group(de):	X11/Applikationen/Wissenschaft
 Group(pl):	X11/Aplikacje/Nauka
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
+Source1:	%{name}.desktop
 Patch0:		%{name}-gsl.patch
 URL:		http://moiss.pquim.unam.mx/moiss/
 BuildRequires:	gsl-devel
@@ -45,6 +46,7 @@ Monte Carlo.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,3 +54,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
+%{_applnkdir}/Scientific/%{name}.desktop
