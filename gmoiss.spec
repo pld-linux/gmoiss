@@ -40,7 +40,7 @@ metodami Monte Carlo.
 %build
 rm -f acinclude.m4 missing
 %{__libtoolize}
-gettextize --copy --force
+%{__gettextize}
 aclocal -I macros
 %{__autoconf}
 %{__automake}
