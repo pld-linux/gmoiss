@@ -4,6 +4,6 @@ Comment=Quantum Chemistry program
 Comment[pl]=Program do chemii kwantowej
 Icon=gmoiss.png
 Exec=gmoiss
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8
