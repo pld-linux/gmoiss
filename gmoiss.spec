@@ -6,6 +6,7 @@ Release:	9
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
+# Source0-md5:	cf85ea01ac57afc56cc3cd6cbce5a82d
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-gsl.patch
