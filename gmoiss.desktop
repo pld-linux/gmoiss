@@ -7,4 +7,5 @@ Icon=gmoiss.png
 Exec=gmoiss
 Terminal=false
 Type=Application
+Categories=GTK;Education;Science;Chemistry;
 # vi: encoding=utf-8
