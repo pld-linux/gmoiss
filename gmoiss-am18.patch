@@ -1,0 +1,122 @@
+diff -urN gmoiss-0.5.orig/macros/curses.m4 gmoiss-0.5.new/macros/curses.m4
+--- gmoiss-0.5.orig/macros/curses.m4	1998-11-26 13:27:06.000000000 +0100
++++ gmoiss-0.5.new/macros/curses.m4	2004-07-14 18:37:09.632935192 +0200
+@@ -86,7 +86,7 @@
+ dnl 
+ 
+ 
+-AC_DEFUN(AC_CHECK_CURSES,[
++AC_DEFUN([AC_CHECK_CURSES],[
+ 	search_ncurses=true
+ 	screen_manager=""
+ 	has_curses=false
+@@ -150,7 +150,7 @@
+ ])
+ 
+ 
+-AC_DEFUN(AC_USE_SUNOS_CURSES, [
++AC_DEFUN([AC_USE_SUNOS_CURSES], [
+ 	search_ncurses=false
+ 	screen_manager="SunOS 4.x /usr/5include curses"
+ 	AC_MSG_RESULT(Using SunOS 4.x /usr/5include curses)
+@@ -164,7 +164,7 @@
+ 	AC_MSG_RESULT(Please note that some screen refreshs may fail)
+ ])
+ 
+-AC_DEFUN(AC_USE_OSF1_CURSES, [
++AC_DEFUN([AC_USE_OSF1_CURSES], [
+        AC_MSG_RESULT(Using OSF1 curses)
+        search_ncurses=false
+        screen_manager="OSF1 curses"
+@@ -175,7 +175,7 @@
+        CURSES_LIBS="-lcurses"
+ ])
+ 
+-AC_DEFUN(AC_USE_SYSV_CURSES, [
++AC_DEFUN([AC_USE_SYSV_CURSES], [
+ 	AC_MSG_RESULT(Using SysV curses)
+ 	AC_DEFINE(HAS_CURSES)
+ 	has_curses=true
+@@ -210,7 +210,7 @@
+ dnl
+ dnl Parameters: directory filename cureses_LIBS curses_INCLUDEDIR nicename
+ dnl
+-AC_DEFUN(AC_NCURSES, [
++AC_DEFUN([AC_NCURSES], [
+     if $search_ncurses
+     then
+         if test -f $1/$2
+@@ -227,7 +227,7 @@
+     fi
+ ])
+ 
+-AC_DEFUN(AC_SEARCH_NCURSES, [
++AC_DEFUN([AC_SEARCH_NCURSES], [
+     AC_CHECKING("location of ncurses.h file")
+ 
+     AC_NCURSES(/usr/include, ncurses.h, -lncurses,, "ncurses on /usr/include")
+diff -urN gmoiss-0.5.orig/macros/gnome-gettext.m4 gmoiss-0.5.new/macros/gnome-gettext.m4
+--- gmoiss-0.5.orig/macros/gnome-gettext.m4	1999-02-15 18:58:31.000000000 +0100
++++ gmoiss-0.5.new/macros/gnome-gettext.m4	2004-07-14 18:38:16.107829472 +0200
+@@ -12,7 +12,7 @@
+ 
+ # serial 5
+ 
+-AC_DEFUN(AM_GNOME_WITH_NLS,
++AC_DEFUN([AM_GNOME_WITH_NLS],
+   [AC_MSG_CHECKING([whether NLS is requested])
+     dnl Default is enabled NLS
+     AC_ARG_ENABLE(nls,
+@@ -210,7 +210,7 @@
+     AC_SUBST(POSUB)
+   ])
+ 
+-AC_DEFUN(AM_GNOME_GETTEXT,
++AC_DEFUN([AM_GNOME_GETTEXT],
+   [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
+    AC_REQUIRE([AC_PROG_CC])dnl
+    AC_REQUIRE([AC_PROG_RANLIB])dnl
+diff -urN gmoiss-0.5.orig/macros/gnome-print-check.m4 gmoiss-0.5.new/macros/gnome-print-check.m4
+--- gmoiss-0.5.orig/macros/gnome-print-check.m4	1999-02-15 10:13:17.000000000 +0100
++++ gmoiss-0.5.new/macros/gnome-print-check.m4	2004-07-14 18:37:47.956109184 +0200
+@@ -8,7 +8,7 @@
+ dnl AM_PATH_GNOME_PRINT([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]]])
+ dnl Test for GNOME-PRINT, and define GNOME_PRINT_CFLAGS and GNOME_PRINT_LIBS
+ dnl
+-AC_DEFUN(AM_PATH_GNOME_PRINT,
++AC_DEFUN([AM_PATH_GNOME_PRINT],
+ [dnl 
+ dnl Get the cflags and libraries from the gnome-config script
+ dnl
+diff -urN gmoiss-0.5.orig/macros/linger.m4 gmoiss-0.5.new/macros/linger.m4
+--- gmoiss-0.5.orig/macros/linger.m4	1998-07-24 08:50:18.000000000 +0200
++++ gmoiss-0.5.new/macros/linger.m4	2004-07-14 18:38:26.973177688 +0200
+@@ -1,7 +1,7 @@
+ dnl
+ dnl Check for struct linger
+ dnl
+-AC_DEFUN(AC_STRUCT_LINGER, [
++AC_DEFUN([AC_STRUCT_LINGER], [
+ av_struct_linger=no
+ AC_MSG_CHECKING(struct linger is available)
+ AC_TRY_RUN([
+diff -urN gmoiss-0.5.orig/macros/need-declaration.m4 gmoiss-0.5.new/macros/need-declaration.m4
+--- gmoiss-0.5.orig/macros/need-declaration.m4	1999-01-06 02:45:20.000000000 +0100
++++ gmoiss-0.5.new/macros/need-declaration.m4	2004-07-14 18:38:44.720479688 +0200
+@@ -1,6 +1,6 @@
+ dnl See whether we need a declaration for a function.
+ dnl GCC_NEED_DECLARATION(FUNCTION [, EXTRA-HEADER-FILES])
+-AC_DEFUN(GCC_NEED_DECLARATION,
++AC_DEFUN([GCC_NEED_DECLARATION],
+ [AC_MSG_CHECKING([whether $1 must be declared])
+ AC_CACHE_VAL(gcc_cv_decl_needed_$1,
+ [AC_TRY_COMPILE([
+@@ -33,7 +33,7 @@
+ 
+ dnl Check multiple functions to see whether each needs a declaration.
+ dnl GCC_NEED_DECLARATIONS(FUNCTION... [, EXTRA-HEADER-FILES])
+-AC_DEFUN(GCC_NEED_DECLARATIONS,
++AC_DEFUN([GCC_NEED_DECLARATIONS],
+ [for ac_func in $1
+ do
+ GCC_NEED_DECLARATION($ac_func, $2)
