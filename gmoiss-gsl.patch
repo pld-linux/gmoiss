@@ -1,42 +1,233 @@
-diff -urN gmoiss-0.5/gmoiss-src/Makefile.in gmoiss-0.5.patch/gmoiss-src/Makefile.in
---- gmoiss-0.5/gmoiss-src/Makefile.in	Fri Mar 19 21:20:46 1999
-+++ gmoiss-0.5.patch/gmoiss-src/Makefile.in	Tue May 22 15:30:48 2001
-@@ -126,7 +126,7 @@
- ZVT_LIBS = @ZVT_LIBS@
- l = @l@
+--- gmoiss-0.5/configure.in~	Wed Mar 17 02:32:20 1999
++++ gmoiss-0.5/configure.in	Wed Aug 15 16:20:29 2001
+@@ -23,24 +23,10 @@
+ AM_GNU_GETTEXT
+ AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
  
--INCLUDES =  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	-I$(includedir) $(GNOME_INCLUDEDIR)
-+INCLUDES =  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	-I$(includedir) $(GNOME_INCLUDEDIR) -I$(oldincludedir)/gsl
+-AC_SUBST(CFLAGS)
+-AC_SUBST(CPPFLAGS)
+-AC_SUBST(LDFLAGS)
+-
+-#disabling PVM configuration till we can figure out what the FUCK
+-#is going on
+-#AC_CHECK_LIB(pvm3,pvm_mytid,PVM_LIBS=" -lpvm3")
+-#AC_CHECK_HEADERS(pvm3.h, [AC_DEFINE(HAVE_PVM)])
+-AC_CHECK_HEADERS(gsl_ran.h)
+-#another PVM trial (thanks to el_oso@eros for his infinite help)
+-#AC_ARG_ENABLE(pvm3, [ --with-pvm enable use
+-#of pvm3],
+-#        [if test "$enableval" = "yes"; then
+-#	            AC_DEFINE(HAVE_PVM)
+-#		    PVM_LIBS=" -lpvm3"
+-#	            AC_SUBST(PVM_LIBS)
+-#		            fi ] ) 
+-
++GSL_LIBS=`gsl-config --libs`
++GSL_CFLAGS=`gsl-config --cflags`
++AC_SUBST(GSL_LIBS)
++AC_SUBST(GSL_CFLAGS)
+ #check if the C compiler has inline for the gsl
+ AC_C_INLINE
  
+--- gmoiss-0.5/gmoiss-src/Makefile.am~	Thu Mar 18 20:53:08 1999
++++ gmoiss-0.5/gmoiss-src/Makefile.am	Wed Aug 15 16:22:19 2001
+@@ -4,8 +4,9 @@
+ # BTW, this file was blantly copyied from gmenu in the gnome-core package.
+ 
+ INCLUDES = 			\
+-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+-	-I$(includedir) $(GNOME_INCLUDEDIR)
++	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
++	-I$(includedir) $(GNOME_INCLUDEDIR)		\
++	$(GSL_CFLAGS)
  
  # change gnomestandalone to your program name
-@@ -140,7 +140,7 @@
+ bin_PROGRAMS = gmoiss 
+@@ -23,10 +24,10 @@
+ gmoiss_LDADD = \
+ 	$(GNOME_LIBDIR)					\
+ 	$(GNOMEUI_LIBS)					\
+-	$(ZVT_LIBS) \
+-	$(INTLLIBS)             \
+-	-lPropList \
+-	-lgsl 
++	$(ZVT_LIBS)					\
++	$(INTLLIBS)					\
++	-lPropList 					\
++	$(GSL_LIBS) 
  
- # change gnomestandalone to your program's name
- # add any libs needed
--gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl 
-+gmoiss_LDADD =  	$(GNOME_LIBDIR)						$(GNOMEUI_LIBS)						$(ZVT_LIBS) 	$(INTLLIBS)             	-lPropList 	-lgsl -lgslcblas
+ #	`gnomeconfig --libs zvt` 
  
- mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
- CONFIG_HEADER = ../config.h
-diff -urN gmoiss-0.5/moiss-src/Makefile.in gmoiss-0.5.patch/moiss-src/Makefile.in
---- gmoiss-0.5/moiss-src/Makefile.in	Fri Mar 19 21:20:47 1999
-+++ gmoiss-0.5.patch/moiss-src/Makefile.in	Tue May 22 15:34:44 2001
-@@ -152,7 +152,7 @@
- @PVM_TRUE@PVM_LIBS = -lpvm3
- @PVM_FALSE@PVM_LIBS = 
+--- gmoiss-0.5/gmoiss-src/gmoiss.c~	Thu Mar 18 15:58:55 1999
++++ gmoiss-0.5/gmoiss-src/gmoiss.c	Wed Aug 15 16:36:48 2001
+@@ -6,8 +6,8 @@
+ #include <config.h>
+ #endif
  
--moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS)
-+moiss_LDADD =  	../gmoiss-src/pl.o 	-lm   	-lPropList         -lgsl 	$(GLIB_LIBS) 	$(PVM_LIBS) -lgslcblas
+-#include <gsl_vector.h>
+-#include <gsl_matrix.h>
++#include <gsl/gsl_vector.h>
++#include <gsl/gsl_matrix.h>
+ #include <unistd.h>
+ #include <gnome.h>
+ #include <glib.h>
+--- gmoiss-0.5/gmoiss-src/pl.h~	Thu Mar 11 20:13:41 1999
++++ gmoiss-0.5/gmoiss-src/pl.h	Wed Aug 15 16:42:06 2001
+@@ -25,7 +25,7 @@
+ #define __PL_H__
  
- mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
- CONFIG_HEADER = ../config.h
-@@ -160,7 +160,7 @@
- PROGRAMS =  $(bin_PROGRAMS)
+ #include <proplist.h>
+-#include <gsl_matrix.h>
++#include <gsl/gsl_matrix.h>
+ /* returns a double array from a PL Array */
+ double * pl_array_to_double(proplist_t pl);
+ /* returns a proplist array made from a double array */
+--- gmoiss-0.5/gmoiss-src/pl.c~	Thu Mar 18 15:24:25 1999
++++ gmoiss-0.5/gmoiss-src/pl.c	Wed Aug 15 16:46:14 2001
+@@ -2,7 +2,7 @@
+ #include <config.h>
+ #endif
  
+-#include <gsl_matrix.h>
++#include <gsl/gsl_matrix.h>
+ #include <stdlib.h>
+ #include <malloc.h>
+ #include <proplist.h>
+--- gmoiss-0.5/moiss-src/Makefile.am~	Wed Mar 17 19:08:41 1999
++++ gmoiss-0.5/moiss-src/Makefile.am	Wed Aug 15 16:52:00 2001
+@@ -3,15 +3,7 @@
+ #
+ # BTW, this file was blantly copyied from gmenu in the gnome-core package.
  
--DEFS = @DEFS@ -I. -I$(srcdir) -I..
-+DEFS = @DEFS@ -I. -I$(srcdir) -I.. -I $(oldincludedir)/gsl
- LIBS = @LIBS@
- moiss_OBJECTS =  moiss.o init.o output.o potential.o walk.o bto.o misc.o \
- linmin.o minimize.o powell.o vmc.o path.o rand.o stats.o
+-#INCLUDES = 			\
+-#	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+-#	-I$(GLIB_CFLAGS) \
+-#	-I$(top_srcdir)/gmoiss-src
+-
+-#INCLUDES = 			\
+-#	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+-#	-I$(includedir) $(GNOME_INCLUDEDIR) $(GLIB_CFLAGS) \
+-#	-I$(top_srcdir)/gmoiss-src
++INCLUDES = $(GSL_CFLAGS)
+ 
+ # change gnomestandalone to your program name
+ bin_PROGRAMS = moiss 
+@@ -28,12 +20,6 @@
+ 	proto.h
+   
+ 
+-# change gnomestandalone to your program's name
+-# add any libs needed
+-CXXFLAGS =  -Wall -W 
+-CFLAGS =  -Wall -W -g 
+-
+-
+ #refer to: http://sourceware.cygnus.com/gsl/html/gsl-ref_16.html#SEC162
+ #for the description of all these compilation flags.
+ #	-W -Wmissing-prototypes -Wstrict-prototypes -Wtraditional -Wconversion -Wshadow -Wpointer-arith 	-Wcast-qual -Wcast-align -Wwrite-strings -fno-common -Wnested-externs	-g
+@@ -59,7 +45,8 @@
+ 	-lPropList \
+         -lgsl \
+ 	$(GLIB_LIBS) \
+-	$(PVM_LIBS)
++	$(PVM_LIBS) \
++	$(GSL_LIBS)
+ 
+ #	$(GNOMEUI_LIBS)					
+ #	$(INTLLIBS) # for i18n
+--- gmoiss-0.5/moiss-src/moiss.c~	Thu Mar 18 15:38:18 1999
++++ gmoiss-0.5/moiss-src/moiss.c	Wed Aug 15 16:52:52 2001
+@@ -7,7 +7,7 @@
+ #include <stdlib.h>
+ #include <time.h>
+ #include <glib.h>
+-#include <gsl_rng.h>
++#include <gsl/gsl_rng.h>
+ #include "moiss.h"
+ #include "output.h"
+ #include "init.h"
+--- gmoiss-0.5/moiss-src/moiss.h~	Thu Mar 18 15:24:35 1999
++++ gmoiss-0.5/moiss-src/moiss.h	Wed Aug 15 16:53:47 2001
+@@ -32,9 +32,9 @@
+ /* Other *.h's included.  */
+ #include "../gmoiss-src/pl.h"
+ //#include "rand.h"
+-#include <gsl_rng.h>
+-#include <gsl_matrix.h>
+-#include <gsl_vector.h>
++#include <gsl/gsl_rng.h>
++#include <gsl/gsl_matrix.h>
++#include <gsl/gsl_vector.h>
+ #include <signal.h>
+ int restart; /* FIXME: do we need this? */
+ 
+--- gmoiss-0.5/moiss-src/init.h~	Thu Mar 18 15:24:31 1999
++++ gmoiss-0.5/moiss-src/init.h	Wed Aug 15 16:54:35 2001
+@@ -25,7 +25,7 @@
+ #ifndef __INIT_H__
+ #define __INIT_H__
+ 
+-#include <gsl_rng.h> 
++#include <gsl/gsl_rng.h> 
+ 
+ int read_gmoiss_from_file(char * filename, proplist_t * dict);
+ void read_gmoiss_from_file_no_pl_c();
+--- gmoiss-0.5/moiss-src/bto.c~	Thu Mar 18 15:24:28 1999
++++ gmoiss-0.5/moiss-src/bto.c	Wed Aug 15 16:55:15 2001
+@@ -2,7 +2,7 @@
+ #include <config.h>
+ #endif
+ 
+-#include <gsl_rng.h>
++#include <gsl/gsl_rng.h>
+ #include <math.h>
+ #include <glib.h>
+ #include <stdlib.h>
+--- gmoiss-0.5/moiss-src/init.c~	Thu Mar 18 15:24:31 1999
++++ gmoiss-0.5/moiss-src/init.c	Wed Aug 15 16:56:10 2001
+@@ -2,9 +2,9 @@
+ #include <config.h>
+ #endif
+ 
+-#include <gsl_rng.h>
+-#include <gsl_matrix.h>
+-#include <gsl_vector.h>
++#include <gsl/gsl_rng.h>
++#include <gsl/gsl_matrix.h>
++#include <gsl/gsl_vector.h>
+ #include <math.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+--- gmoiss-0.5/moiss-src/stats.c~	Wed Mar 17 02:45:36 1999
++++ gmoiss-0.5/moiss-src/stats.c	Wed Aug 15 16:57:07 2001
+@@ -7,7 +7,7 @@
+ #include <stdlib.h>
+ #include <time.h>
+ #include <glib.h>
+-#include <gsl_rng.h>
++#include <gsl/gsl_rng.h>
+ #include "moiss.h"
+ #include "output.h"
+ #include "init.h"
+--- gmoiss-0.5/moiss-src/vmc.c~	Thu Mar 18 15:24:35 1999
++++ gmoiss-0.5/moiss-src/vmc.c	Wed Aug 15 16:57:23 2001
+@@ -2,7 +2,7 @@
+ #include <config.h>
+ #endif
+ 
+-#include <gsl_rng.h>
++#include <gsl/gsl_rng.h>
+ #include <stdio.h>
+ #include <math.h>
+ #include <glib.h>
+--- gmoiss-0.5/moiss-src/walk.c~	Thu Mar 18 15:24:36 1999
++++ gmoiss-0.5/moiss-src/walk.c	Wed Aug 15 16:57:38 2001
+@@ -2,7 +2,7 @@
+ #include <config.h>
+ #endif
+ 
+-#include <gsl_rng.h>
++#include <gsl/gsl_rng.h>
+ #include <math.h>
+ #include <glib.h>
+ #include "stdio.h"
