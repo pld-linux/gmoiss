@@ -10,20 +10,21 @@ Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-gsl.patch
+Patch1:		%{name}-gcc33.patch
+Patch2:		%{name}-am18.patch
 URL:		http://moiss.pquim.unam.mx/moiss/
 BuildRequires:	ORBit-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel
+BuildRequires:	gettext-devel
 BuildRequires:	gsl-devel >= 0.9
 BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	gettext-devel
 BuildRequires:	libPropList-devel
 BuildRequires:	libtool
 BuildRequires:	pvm-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 Gmoiss is a program for Quantum Chemistry computations done with Monte
@@ -36,6 +37,8 @@ metodami Monte Carlo.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 rm -f acinclude.m4 missing
@@ -50,12 +53,12 @@ rm -f acinclude.m4 missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Scientific/Chemistry,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Chemistry
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 #%find_lang %{name}
@@ -68,5 +71,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README ChangeLog TODO
 %attr(755,root,root) %{_bindir}/*
-%{_applnkdir}/Scientific/Chemistry/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
