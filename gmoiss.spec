@@ -2,7 +2,7 @@ Summary:	Quantum Chemistry program
 Summary(pl):	Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Science
 Group(de):	X11/Applikationen/Wissenschaft
@@ -40,7 +40,7 @@ Monte Carlo.
 %patch0 -p1
 
 %build
-%configure --enable-pvm
+./configure --prefix=%{_prefix} --mandir=%{_mandir} --enable-pvm
 %{__make} CFLAGS="%{rpmcflags} -DGCC_INLINE"
 
 %install
