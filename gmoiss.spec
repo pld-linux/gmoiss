@@ -2,7 +2,7 @@ Summary:	Quantum Chemistry program
 Summary(pl):	Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
-Release:	9
+Release:	10
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
