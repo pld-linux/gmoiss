@@ -2,7 +2,7 @@
 Name=Gmoiss
 Comment=Quantum Chemistry program
 Comment[pl]=Program do chemii kwantowej
-Icon=
+Icon=gmoiss.png
 Exec=gmoiss
 Terminal=0
 Type=Application
