@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Gmoiss
+Name[pl]=Gmoiss
+Comment=Quantum Chemistry program
+Comment[pl]=Program do chemii kwantowej
+Icon=
+Exec=gmoiss
+Terminal=0
+Type=Application
