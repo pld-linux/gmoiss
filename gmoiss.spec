@@ -1,15 +1,15 @@
+Summary:	Quantum Chemistry program
+Summary(pl):	Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
 Release:	1
 License:	GPL
-Summary:	Quantum Chemistry program
-Summary(pl):	Program do chemii kwantowej
-URL:		http://moiss.pquim.unam.mx/moiss
 Group:		X11/Applications/Science
 Group(de):	X11/Applikationen/Wissenschaft
 Group(pl):	X11/Aplikacje/Nauka
 Source0:	http://icm.linux.tucows.com/files/gnome/office/moiss-%{version}.tar.gz
 Patch0:		%{name}-gsl.patch
+URL:		http://moiss.pquim.unam.mx/moiss/
 BuildRequires:	gsl-devel
 BuildRequires:	glib-devel >= 1.1.12
 BuildRequires:	pvm-devel
@@ -21,16 +21,18 @@ BuildRequires:	ORBit-devel
 BuildRequires:	esound-devel
 Requires:	glib >= 1.1.12
 Requires:	gtk+ >= 1.2.0
-BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
 %description
-Gmoiss is a program for Quantum Chemistry computations done with Monte Carlo methods.
+Gmoiss is a program for Quantum Chemistry computations done with Monte
+Carlo methods.
 
 %description -l pl
-Gmoiss jest program do obliczeñ z dziedziny chemii kwantowej metodami Monte Carlo.
+Gmoiss jest program do obliczeñ z dziedziny chemii kwantowej metodami
+Monte Carlo.
 
 %prep
 %setup -q
