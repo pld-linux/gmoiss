@@ -64,8 +64,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}.lang
 #%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_applnkdir}/Scientific/*
