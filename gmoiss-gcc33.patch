@@ -1,0 +1,112 @@
+diff -urN gmoiss-0.5.orig/gmoiss-src/gmoiss.c gmoiss-0.5.new/gmoiss-src/gmoiss.c
+--- gmoiss-0.5.orig/gmoiss-src/gmoiss.c	2004-07-14 18:04:28.000000000 +0200
++++ gmoiss-0.5.new/gmoiss-src/gmoiss.c	2004-07-14 17:49:34.000000000 +0200
+@@ -1203,7 +1203,7 @@
+ 				/*  gtk_widget_destroy(widget); */
+ 				break;
+ 			case OPEN_NOT_CORRECT_VERSION:
+-				w = gnome_message_box_new(_("The file was saved in an older Gmoiss \n
++				w = gnome_message_box_new(_("The file was saved in an older Gmoiss \n\
+ Please create a new calculation file with this version."),
+ 							  GNOME_MESSAGE_BOX_ERROR, 
+ 							  GNOME_STOCK_BUTTON_OK, NULL);
+diff -urN gmoiss-0.5.orig/gmoiss-src/gmoiss-defaults.h gmoiss-0.5.new/gmoiss-src/gmoiss-defaults.h
+--- gmoiss-0.5.orig/gmoiss-src/gmoiss-defaults.h	1999-03-17 19:08:33.000000000 +0100
++++ gmoiss-0.5.new/gmoiss-src/gmoiss-defaults.h	2004-07-14 18:03:43.000000000 +0200
+@@ -24,51 +24,51 @@
+ #ifndef __GMOISS_DEFAULTS_H__
+ #define __GMOISS_DEFAULTS_H__
+ 
+-const char * problem_description = "
+-{
+-\"GMoiss Version\" = 0.5;
+-Potential = \"Hydrogen atom\";
+-\"Trial Function\" = \"Hydrogen (Slater)\";
+-Dimensions = \"3 dimensions\";
+-Particles = 1;
+-Walkers = 1000;
+-\"Diffusion Constant\" = 0.500000;
+-\"Time step\" = 0.002000;
+-\"Maximum Branches\" = 3;
+-\"dt convergence factor\" = 1.000000;
+-\"Initial Position\" = \"Gaussian Random Spread\";
+-\"Gaussian Spread Range\" = 1.000000;
+-\"Gaussian Trial Function Alpha\" = 0.950000;
+-\"Random Number Generator Seed\" = 1;
+-\"Potential Box X\" = 1.000000;
+-\"Potential Box Y\" = 1.000000;
+-\"Potential Box Z\" = 1.000000;
+-\"Tunnel Potential A\" = 0.500000;
+-\"Tunnel Potential B\" = 0.700000;
+-\"Tunnel Potential H\" = 100.000000;
+-\"Atomic Coordinates\" = ({x = 0;y = 0;z = 0;\"Atomic Number\" = 1;});
+-\"Lehnard-Jones Sigma\" = 3.405;
+-\"Lehnard-Jones Epsilon\" = 119.4;
+-\"Graph: Divisions per Dimension\" = 200;
+-\"Graph: Minimum\" = \"-3.000000\";
+-\"Graph: Maximum\" = 3.000000;
+-\"Electronic Repulsion Scale\" = 1.000000;
+-\"Spin Parity Operator\" = 1;
+-\"CE Number of Terms\" = 1;
+-\"Electron-Electron TF\" = \"Jastrow\";
+-\"Electron-Nuclei TF\" = \"Jastrow\";
+-\"CE Sym: Number of Terms\" = 4;
+-\"CE Sym: Matrix\" = ((1, 0), (1, 0), (1, 0), (1, 0));
+-\"CE Electron-Electron Symmetry\" = Yes;
+-\"CE Electron-Nuclei Symmetry\" = No;
+-\"CE Electron-Nuclei Parameters\" = 6;
+-\"CE Prefactor Terms\" = 2;
+-\"CE Prefactors\" = ((1.000),(1.000));
+-\"Parameters File Path\" = \"./psi.inp\";
+-\"Output Files Path\" = \"/tmp/moiss/\";
+-\"Moiss Binary Path\" = \"moiss\";
+-\"Job Name\" = \"hydrogen-1\";
+-}
++const char * problem_description = " \n\
++{ \n\
++\"GMoiss Version\" = 0.5; \n\
++Potential = \"Hydrogen atom\"; \n\
++\"Trial Function\" = \"Hydrogen (Slater)\"; \n\
++Dimensions = \"3 dimensions\"; \n\
++Particles = 1; \n\
++Walkers = 1000; \n\
++\"Diffusion Constant\" = 0.500000; \n\
++\"Time step\" = 0.002000; \n\
++\"Maximum Branches\" = 3; \n\
++\"dt convergence factor\" = 1.000000; \n\
++\"Initial Position\" = \"Gaussian Random Spread\"; \n\
++\"Gaussian Spread Range\" = 1.000000; \n\
++\"Gaussian Trial Function Alpha\" = 0.950000; \n\
++\"Random Number Generator Seed\" = 1; \n\
++\"Potential Box X\" = 1.000000; \n\
++\"Potential Box Y\" = 1.000000; \n\
++\"Potential Box Z\" = 1.000000; \n\
++\"Tunnel Potential A\" = 0.500000; \n\
++\"Tunnel Potential B\" = 0.700000; \n\
++\"Tunnel Potential H\" = 100.000000; \n\
++\"Atomic Coordinates\" = ({x = 0;y = 0;z = 0;\"Atomic Number\" = 1;}); \n\
++\"Lehnard-Jones Sigma\" = 3.405; \n\
++\"Lehnard-Jones Epsilon\" = 119.4; \n\
++\"Graph: Divisions per Dimension\" = 200; \n\
++\"Graph: Minimum\" = \"-3.000000\"; \n\
++\"Graph: Maximum\" = 3.000000; \n\
++\"Electronic Repulsion Scale\" = 1.000000; \n\
++\"Spin Parity Operator\" = 1; \n\
++\"CE Number of Terms\" = 1; \n\
++\"Electron-Electron TF\" = \"Jastrow\"; \n\
++\"Electron-Nuclei TF\" = \"Jastrow\"; \n\
++\"CE Sym: Number of Terms\" = 4; \n\
++\"CE Sym: Matrix\" = ((1, 0), (1, 0), (1, 0), (1, 0)); \n\
++\"CE Electron-Electron Symmetry\" = Yes; \n\
++\"CE Electron-Nuclei Symmetry\" = No; \n\
++\"CE Electron-Nuclei Parameters\" = 6; \n\
++\"CE Prefactor Terms\" = 2; \n\
++\"CE Prefactors\" = ((1.000),(1.000)); \n\
++\"Parameters File Path\" = \"./psi.inp\"; \n\
++\"Output Files Path\" = \"/tmp/moiss/\"; \n\
++\"Moiss Binary Path\" = \"moiss\"; \n\
++\"Job Name\" = \"hydrogen-1\"; \n\
++} \n\
+ ";
+ 
+ #endif /* __GMOISS_DEFAULTS_H__ */
