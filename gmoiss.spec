@@ -1,5 +1,5 @@
 Summary:	Quantum Chemistry program
-Summary(pl):	Program do chemii kwantowej
+Summary(pl.UTF-8):   Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
 Release:	10
@@ -30,8 +30,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Gmoiss is a program for Quantum Chemistry computations done with Monte
 Carlo methods.
 
-%description -l pl
-Gmoiss jest programem do obliczeñ z dziedziny chemii kwantowej
+%description -l pl.UTF-8
+Gmoiss jest programem do obliczeÅ„ z dziedziny chemii kwantowej
 metodami Monte Carlo.
 
 %prep
