@@ -1,5 +1,5 @@
 Summary:	Quantum Chemistry program
-Summary(pl.UTF-8):   Program do chemii kwantowej
+Summary(pl.UTF-8):	Program do chemii kwantowej
 Name:		gmoiss
 Version:	0.5
 Release:	10
