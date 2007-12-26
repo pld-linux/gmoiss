@@ -1,9 +1,8 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Gmoiss
 Comment=Quantum Chemistry program
 Comment[pl]=Program do chemii kwantowej
-Icon=gmoiss.png
+Icon=gmoiss
 Exec=gmoiss
 Terminal=false
 Type=Application
